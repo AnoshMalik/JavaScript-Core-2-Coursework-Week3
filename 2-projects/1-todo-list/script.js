@@ -1,15 +1,12 @@
 let todos = [
-  // { task: "Wash the dishes", completed: false },
-  // { task: "Do the shopping", completed: false },
+  { task: "Wash the dishes", completed: false },
+  { task: "Do the shopping", completed: false },
 ];
+let listCounter = 0;
+let list = document.getElementById("todo-list");
 
 function populateTodoList(todo) {
-  let list = document.getElementById("todo-list");
   let itemAdded = todo;
-
-  // const previousListClasses = document.querySelector("li");
-  // let classValues = previousListClasses.classList;
-  // classValues = classValues.toString().replace(" ", ",");
 
   const liTag = document.createElement("li");
   const spanTag = document.createElement("span");
@@ -31,6 +28,12 @@ function populateTodoList(todo) {
   iTagOne.ariaHidden = true;
   iTagTwo.ariaHidden = true;
 
+  iTagOne.style.padding = "5px";
+  iTagOne.style.margin = "5px";
+
+  iTagTwo.style.padding = "5px";
+  iTagTwo.style.margin = "5px";
+
   spanTag.appendChild(iTagOne);
   spanTag.appendChild(iTagTwo);
 
@@ -39,13 +42,21 @@ function populateTodoList(todo) {
   // APPENDING VARIABLES
   list.appendChild(liTag);
 
+  let iTagOneClickCounter = 0;
   iTagOne.onclick = function () {
-    liTag.style.textDecoration = "line-through";
-    itemAdded.completed = true;
-    console.log(itemAdded);
+    iTagOneClickCounter++;
+    if (iTagOneClickCounter % 2 != 0) {
+      liTag.style.textDecoration = "line-through";
+      itemAdded.completed = true;
+    } else {
+      liTag.style.textDecoration = "none";
+      itemAdded.completed = false;
+    }
   };
 
   iTagTwo.onclick = function () {
+    // listCounter--;
+    // delete iTagTwo.parentNode.inner
     iTagTwo.parentNode.parentNode.parentNode.removeChild(liTag);
   };
 }
@@ -54,9 +65,13 @@ function populateTodoList(todo) {
 function addNewTodo(event) {
   // The code below prevents the page from refreshing when we click the 'Add Todo' button.
   event.preventDefault();
-
+  listCounter++;
   const todoInput = document.getElementById("todoInput");
-  const newObject = { task: todoInput.value, completed: false };
+  const newObject = {
+    task: todoInput.value,
+    completed: false,
+    id: listCounter,
+  };
   todos.push(newObject);
   let lastElement = todos[todos.length - 1];
 
@@ -66,14 +81,16 @@ function addNewTodo(event) {
 const clearTodosButton = document.createElement("button");
 clearTodosButton.innerText = "Clear All";
 clearTodosButton.classList.add("btn", "btn-primary", "mb-3");
-const divContainer = document.querySelector("#content");
+const divContainer = document.querySelector("#col2");
 divContainer.appendChild(clearTodosButton);
 
 clearTodosButton.addEventListener("click", deleteAllCompletedTodos);
 
 // Advanced challenge: Write a fucntion that checks the todos in the todo list and deletes the completed ones (we can check which ones are completed by seeing if they have the line-through styling applied or not).
 function deleteAllCompletedTodos() {
- 
+  let val = todos.filter((todo) => todo.completed == true);
+  // delete todos.
+  let listArray = list.chil;
 
-
-  }
+  console.log(val);
+}
