@@ -18,9 +18,7 @@ triesOutput.appendChild(triesResult);
 
 function guessNumber() {
   fixedTries--;
-  //Collect input from the user
-  // let guess = document.querySelector(".inputs-Values").value;
-  //If the user inputs a bad input ie 0, empty string, number greater that 100, number less than zero Print "Please enter a number between 1 and 100"
+ 
 let guess = document.querySelector(".inputs-Values").value;
   if (fixedTries > 0) {
     if (guess > 100 || guess <= 0) {
@@ -44,7 +42,6 @@ let guess = document.querySelector(".inputs-Values").value;
       } else if (guess = randomNumber) {
         outputResult.innerText = randomNumber + " - Guess is correct. You win!";
         guess.value = "";
-        // triesResult.innerText = "You have " + fixedTries + " tries left";
 
       }
     
@@ -75,6 +72,9 @@ function newGame() {
   let inputValue = document.querySelector(".inputs-Values");
   inputValue.value = "";
   outputResult.innerText = "New Game!";
+  fixedTries = 10;
+  triesResult.innerText = "You have " + fixedTries + " tries left";
+
 
   //Reset users input field
   //Reset tries, and triesTaken by the user
